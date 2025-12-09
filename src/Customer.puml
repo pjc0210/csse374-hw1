@@ -27,5 +27,6 @@ ORDER,
 REPORT,
 DONE
 }
-
+programManager --|> Song
+programManager ..|> Customer
 @enduml
