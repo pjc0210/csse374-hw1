@@ -2,33 +2,42 @@
 'https://plantuml.com/class-diagram
 
 +class programManager {
-+ songs : ArrayList<Song>
-+ selectAction(action : int)
-+ placeOrder(songNum : int, email : String, cardNum : int, sweetHeartName : String)
-+ generateReport(memberID : int)
-+ singerCheckOut(memberID : int)
+    - songToSinger: HashMap<String, Singer>
+    - singer: HashMap<Integer, Singer>
+    + selectAction(action: Action)
+    - placeOrder(songNum: int, email: String, cardNum: int, sweetHeartName: String): boolean
+    - generateReport(singerID: int)
+    - singerCheckOut(singerID : int)
 }
-+class Song {
-    +name : String
-    +singerID : int
-    -inProgress : bool
-    canSing()
+
++class Order {
+    - orderID: int
+    - customerEmail: String
+    - customerCardNum: int
+    - sweetheartName: String
+    - songOrdered: String
+    + getSweetheartName(): String
+    + chargeCard(): boolean
 }
-+class Customer {
-- email : String
-- cardNum : int
-+ sweetHeartName : String
-+ songNum : int
-+ chargeCard()
+
++class Singer {
+    - id: int
+    - name: String
+    - songName: String
+    - singOrders: ArrayList<Order>
+    - isAvailable: boolean
+    + generateEmailReport(): boolean
+    + addOrder(order: Order): boolean
+    + finishOrders(): boolean
 }
 
 +enum Action {
-ORDER,
-REPORT,
-DONE
+    ORDER,
+    REPORT,
+    DONE
 }
 
-programManager ..> Action
-programManager --> Song
-programManager ..> Customer
+programManager .u.> Action
+programManager -->"*" Singer
+Singer -->"*"Order
 @enduml
