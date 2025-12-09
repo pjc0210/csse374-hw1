@@ -27,6 +27,8 @@ ORDER,
 REPORT,
 DONE
 }
-programManager --|> Song
-programManager ..|> Customer
+
+programManager ..> Action
+programManager --> Song
+programManager ..> Customer
 @enduml
