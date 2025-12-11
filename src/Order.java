@@ -21,4 +21,9 @@ public class Order {
         System.out.println("Card charged for Order "+ orderID);
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Order [customerEmail=" + customerEmail + ", sweetHeartname=" + sweetheartName + ", songOrdered=" + songOrdered + "]";
+    }
 }

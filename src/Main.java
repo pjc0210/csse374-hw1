@@ -7,32 +7,45 @@ public class Main {
         HashMap<Integer, Singer> singer = new HashMap<Integer, Singer>();
 
         //TODO: initialize HashMaps with values
+        Singer s1 = new Singer(1, "Mason", "\"Can't Help Falling in Love\" by Elvis Presley");
+        Singer s2 = new Singer(2, "PJ", "\"At Last\" by Etta James");
+        Singer s3 = new Singer(3, "Niko", "\"Ballad of a homeschooled girl\" by Olivia Rodrigo");
+        songToSinger.put(s1.getSongName(), s1);
+        songToSinger.put(s2.getSongName(), s2);
+        songToSinger.put(s3.getSongName(), s3);
+        singer.put(1, s1);
+        singer.put(2, s2);
+        singer.put(3, s3);
 
         ProgramManager pm = new ProgramManager(songToSinger, singer);
 
         // TODO: program logic, structure, etc.
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to the Jabbering Jen's Music Club Valentine's Song System!");
-        System.out.println("""
+        // Main I/O selecting logic
+        while(true){
+            System.out.println("Welcome to the Jabbering Jen's Music Club Valentine's Song System!");
+            System.out.print("""
                 Select an action:
                 1 - Customers – Order a song for Valentine’s Day
                 2 – Club members – Get a report of requests for your song
                 3 – Club members – Report back that your songs are done
                 4 - Admin - Show data for all club members
-                Enter 1, 2, 3 or 4:
+                Enter 1, 2, 3 or 4: 
                 """);
-
-        // Main I/O selecting logic
-
-        while(true){
             // TODO add try catch
-            int input = Integer.parseInt(scanner.nextLine().strip());
+            String line = scanner.nextLine().trim();
+            int input = -1;
+            try {
+                input = Integer.parseInt(line);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                continue;
+            }
             if (input > 4 || input < 1){
                 System.out.println("Invalid input, please try again");
             } else {
-                scanner.close();
                 pm.selectAction(input);
-                break;
+                System.out.println();
             }
         }
     }

@@ -17,6 +17,9 @@ public class Singer {
 
     public String generateEmailReport() {
         // TODO: generate report + return
+        if (singOrders.isEmpty()) {
+            return "No Orders";
+        }
         isAvailable = false;
         return singOrders.toString();
     }
@@ -34,6 +37,9 @@ public class Singer {
         if (singOrders.isEmpty()){
             return false;
         }
+        for (Order order : singOrders) {
+            order.chargeCard();
+        }
         singOrders.clear();
         this.isAvailable = true;
         return true;
@@ -45,5 +51,10 @@ public class Singer {
 
     public String getSongName() {
         return this.songName;
+    }
+
+    @Override
+    public String toString() {
+        return "[SingerID: " + id + ", Name: " + name + ", SongName: " + songName +  " NumOrders: "+ singOrders.size() + " isAvailable: " + isAvailable + "]";
     }
 }

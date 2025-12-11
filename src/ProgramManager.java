@@ -22,45 +22,88 @@ public class ProgramManager {
                 System.out.println("Order a song for Valentine’s Day...\n" +
                         "Select the song from this list:\n");
                 int song = listSong();
+                if (song <=0){
+                    break;
+                }
                 System.out.println("Enter your email address: ");
                 String email = scanner.nextLine();
-                System.out.println("Enter your credit card number: ");
-                // TODO try catch
-                int creditCard = Integer.parseInt(scanner.nextLine().strip());
+                int cc;
+                while (true) {
+                    System.out.println("Enter your credit card number: ");
+                    String line = scanner.nextLine().trim();
+
+                    try {
+                        cc = Integer.parseInt(line);
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. Please enter a valid number.");
+                    }
+                }
+
                 System.out.println("Enter your sweetheart’s name: ");
                 String name = scanner.nextLine();
-                boolean ret = placeOrder(song, email, creditCard, name);
+                boolean ret = placeOrder(song, email, cc, name);
                 if (ret){
                     System.out.println("Order completed!");
                 } else {
                     System.out.println("Order failed!");
                 }
-                scanner.close();
+
                 break;
             case 2:
                 System.out.println("Get a report of requests for your song...\n" +
                         "Enter your member ID number: \n");
-                int memberId = scanner.nextInt();
-                String report = generateReport(memberId);
+
+                String report = generateReport( getMemberId(scanner));
                 System.out.println(report);
                 break;
             case 3:
+                System.out.println("Report back that your songs are done...\n" +
+                        "Enter your member ID number: \n");
+                boolean ret2 = singerCheckout(getMemberId(scanner));
+
+               if (ret2){
+                   System.out.println("Report completed!");
+               } else {
+                   System.out.println("Report failed!");
+               }
                 break;
             case 4:
+                System.out.println(singer.values());
                 break;
             default:
                 System.out.println("Invalid action");
         }
     }
+
+    private int getMemberId(Scanner scanner) {
+        int memberId2;
+        while (true) {
+            System.out.print("Enter member ID: ");
+            String line = scanner.nextLine().trim();
+            try {
+                memberId2 = Integer.parseInt(line);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+            }
+        }
+        return memberId2;
+    }
+
     private int listSong(){
         ArrayList<String> availableSongs = new ArrayList<>();
         int i = 1;
         for (String song : songToSinger.keySet()) {
             if (songToSinger.get(song).isAvailable()){
                 availableSongs.add(song);
-                i++;
                 System.out.println(i + " - " + song);
+                i++;
             }
+        }
+        if (availableSongs.isEmpty()) {
+            System.out.println("No songs available!");
+            return 0;
         }
         Scanner scanner = new Scanner(System.in);
         System.out.print("Your choice (1-" + availableSongs.size() + "): ");
@@ -71,12 +114,9 @@ public class ProgramManager {
             if (input > availableSongs.size() || input < 1) {
                 System.out.println("Invalid choice");
             } else {
-                // Subtract to align input with array 0 indexing
-                input--;
                 break;
             }
         }
-        scanner.close();
         return input;
     }
     private boolean placeOrder(int songNum, String email, int cardNum, String sweetheartName) {
@@ -84,7 +124,7 @@ public class ProgramManager {
         Singer s = null;
         for (String song : this.songToSinger.keySet()) {
             s = this.songToSinger.get(song);
-            if (songNum == 1) {
+            if (songNum == 1 && s.isAvailable()) {
                 songName = s.getSongName();
                 break;
             }
