@@ -31,7 +31,10 @@ public class ProgramManager {
                 while (true) {
                     System.out.println("Enter your credit card number: ");
                     String line = scanner.nextLine().trim();
-
+                    if (line.length() != 16){
+                        System.out.println("Invalid credit card number");
+                        continue;
+                    }
                     try {
                         cc = Integer.parseInt(line);
                         break;
