@@ -17,7 +17,8 @@ public class Singer {
 
     public String generateEmailReport() {
         // TODO: generate report + return
-        return null;
+        isAvailable = false;
+        return singOrders.toString();
     }
 
     public boolean addOrder(Order o){
