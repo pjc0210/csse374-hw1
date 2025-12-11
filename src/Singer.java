@@ -52,6 +52,12 @@ public class Singer {
 
     @Override
     public String toString() {
-        return "[Name: " + name + ", SongName: " + songName +  " NumOrders: "+ singOrders.size() + " isAvailable: " + isAvailable + "]";
+        String orders;
+        if (singOrders.isEmpty()) {
+            orders = "No Orders";
+        } else {
+            orders = singOrders.toString();
+        }
+        return "[Name: " + name + ", SongName: " + songName +  ", NumOrders: "+ singOrders.size() + ", Orders: " +  orders +", isAvailable: " + isAvailable + "]\n";
     }
 }

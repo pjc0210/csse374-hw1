@@ -24,6 +24,6 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [customerEmail=" + customerEmail + ", sweetHeartname=" + sweetheartName + ", songOrdered=" + songOrdered + "]";
+        return "Order [customerEmail=" + customerEmail + ", sweetHeartname=" + sweetheartName + ", songOrdered=" + songOrdered + ", customerCardNum=" + customerCardNum + "]\n";
     }
 }
