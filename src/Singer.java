@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 
 public class Singer {
-    private int id; // TODO: maybe we dont need this? Better to have this to double check but it can also be stored in Hashmap in Manager
     private String name;
     private final String songName;
     private ArrayList<Order> singOrders;
     private boolean isAvailable;
 
-    public Singer(int id, String name, String songName) {
-        this.id = id;
+    public Singer(String name, String songName) {
         this.name = name;
         this.songName = songName;
         this.singOrders = new ArrayList<Order>();
@@ -29,7 +27,6 @@ public class Singer {
             return false;
         }
         singOrders.add(o);
-        this.isAvailable = false;
         return true;
     }
 
@@ -55,6 +52,6 @@ public class Singer {
 
     @Override
     public String toString() {
-        return "[SingerID: " + id + ", Name: " + name + ", SongName: " + songName +  " NumOrders: "+ singOrders.size() + " isAvailable: " + isAvailable + "]";
+        return "[Name: " + name + ", SongName: " + songName +  " NumOrders: "+ singOrders.size() + " isAvailable: " + isAvailable + "]";
     }
 }

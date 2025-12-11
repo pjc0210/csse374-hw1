@@ -7,9 +7,9 @@ public class Main {
         HashMap<Integer, Singer> singer = new HashMap<Integer, Singer>();
 
         //TODO: initialize HashMaps with values
-        Singer s1 = new Singer(1, "Mason", "\"Can't Help Falling in Love\" by Elvis Presley");
-        Singer s2 = new Singer(2, "PJ", "\"At Last\" by Etta James");
-        Singer s3 = new Singer(3, "Niko", "\"Ballad of a homeschooled girl\" by Olivia Rodrigo");
+        Singer s1 = new Singer("Mason", "\"Can't Help Falling in Love\" by Elvis Presley");
+        Singer s2 = new Singer( "PJ", "\"At Last\" by Etta James");
+        Singer s3 = new Singer( "Niko", "\"Ballad of a homeschooled girl\" by Olivia Rodrigo");
         songToSinger.put(s1.getSongName(), s1);
         songToSinger.put(s2.getSongName(), s2);
         songToSinger.put(s3.getSongName(), s3);
