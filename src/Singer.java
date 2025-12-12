@@ -1,16 +1,18 @@
 import java.util.ArrayList;
 
 public class Singer {
+    private int id;
     private String name;
     private final String songName;
     private ArrayList<Order> singOrders;
     private boolean isAvailable;
 
-    public Singer(String name, String songName) {
+    public Singer(int id, String name, String songName) {
         this.name = name;
         this.songName = songName;
         this.singOrders = new ArrayList<Order>();
         this.isAvailable = true;
+        this.id = id;
     }
 
     public String generateEmailReport() {
@@ -48,6 +50,10 @@ public class Singer {
 
     public String getSongName() {
         return this.songName;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override
