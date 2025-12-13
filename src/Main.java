@@ -34,6 +34,7 @@ public class Main {
                 Enter 1, 2, 3 or 4:  """);
             String line = scanner.nextLine().trim();
             if (line.equals("exit")) {
+            	System.out.println("Exiting...");
                 break;
             }
 

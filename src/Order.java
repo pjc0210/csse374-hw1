@@ -25,6 +25,7 @@ public class Order {
     // Mason
     @Override
     public String toString() {
-        return "Order [customerEmail=" + customerEmail + ", customerCardNum=" + customerCardNum + ", sweetheartName=" + sweetheartName + ", songOrdered=" + songOrdered + "]\n";
+        // Singer already includes name of song ordered
+        return "Order [customerEmail=" + customerEmail + ", customerCardNum=" + customerCardNum + ", sweetheartName=" + sweetheartName + "]\n";
     }
 }
