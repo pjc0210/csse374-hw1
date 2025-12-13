@@ -10,14 +10,6 @@ public class ProgramManager {
     private final Scanner scanner;
     private static final int NUM_TRIES_BEFORE_ERROR = 3;
 
-    private enum Action {
-        ORDER,
-        REPORT,
-        DONE,
-        SUMMARY,
-        INVALID_ACTION
-    }
-
     public ProgramManager(HashMap<String, Singer> songToSinger, HashMap<Integer, Singer> singer) {
         this.songToSinger = songToSinger;
         this.singer = singer;
