@@ -10,6 +10,7 @@ public class ProgramManager {
     private final Scanner scanner;
     private static final int NUM_TRIES_BEFORE_ERROR = 3;
 
+    // PJ
     public ProgramManager(HashMap<String, Singer> songToSinger, HashMap<Integer, Singer> singer) {
         this.songToSinger = songToSinger;
         this.singer = singer;
@@ -17,6 +18,7 @@ public class ProgramManager {
         this.scanner = new Scanner(System.in);
     }
 
+    // PJ
     private Action getAction(int choice){
         return switch (choice) {
             case 1 -> Action.ORDER;
@@ -27,6 +29,7 @@ public class ProgramManager {
         };
     }
 
+    // Mason
     public void selectAction(int action) {
         Action act = getAction(action);
         switch (act) {
@@ -130,6 +133,7 @@ public class ProgramManager {
         }
     }
 
+    // PJ
     private Singer getSingerFromInput() {
         String input = null;
         int singerID = -1;
@@ -149,6 +153,7 @@ public class ProgramManager {
         return s;
     }
 
+    // Mason
     private int selectSong(){
         ArrayList<String> availableSongs = new ArrayList<>();
         int i = 1;
@@ -185,6 +190,7 @@ public class ProgramManager {
         return input;
     }
 
+    // PJ
     private boolean placeOrder(int songNum, String email, long cardNum, String sweetheartName) {
         String songName = "";
         Singer singer = null;
@@ -206,19 +212,19 @@ public class ProgramManager {
         Order newOrder = new Order(nextOrderNum++, email, cardNum, sweetheartName, songName);
         return singer.addOrder(newOrder);
     }
-
+    // PJ
     private String handleGenerateReport(Singer s){
         return s.generateEmailReport();
     }
-
+    // PJ
     private int handleSingerCheckout(Singer s) {
         return s.finishOrders();
     }
-
+    // PJ
     public Scanner getScanner() {
         return this.scanner;
     }
-
+    // PJ
     private boolean checkEmailValidity(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";

@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
+
+    // Mason & PJ
     public static void main(String[] args) {
         HashMap<String, Singer> songToSinger = new HashMap<String, Singer>();
         HashMap<Integer, Singer> singer = new HashMap<Integer, Singer>();

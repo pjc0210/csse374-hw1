@@ -6,7 +6,7 @@ public class Singer {
     private final String songName;
     private ArrayList<Order> singOrders;
     private boolean isAvailable;
-
+    // PJ
     public Singer(int id, String name, String songName) {
         this.name = name;
         this.songName = songName;
@@ -14,7 +14,7 @@ public class Singer {
         this.isAvailable = true;
         this.id = id;
     }
-
+    // Mason
     public String generateEmailReport() {
         if (singOrders.isEmpty()) {
             return "No Orders";
@@ -23,7 +23,7 @@ public class Singer {
         // should be emailed but for this purpose it is returned to be printed to console
         return this.getOrderReport();
     }
-
+    // PJ
     public boolean addOrder(Order o){
         if (singOrders.contains(o)){
             return false;
@@ -31,7 +31,7 @@ public class Singer {
         singOrders.add(o);
         return true;
     }
-
+    // Mason
     public int finishOrders() {
         if (singOrders.isEmpty()) {
             return 0;
@@ -59,7 +59,7 @@ public class Singer {
     public int getId() {
         return this.id;
     }
-
+    // PJ
     public String getOrderReport() {
         StringBuilder sb = new StringBuilder();
         sb.append("Sweethearts to sing to: ");
@@ -71,7 +71,7 @@ public class Singer {
         sb.append("\n");
         return sb.toString();
     }
-
+    // Mason
     @Override
     public String toString() {
         String orders;
