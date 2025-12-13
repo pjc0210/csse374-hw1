@@ -16,10 +16,12 @@ public class Order {
     public String getSweetheartName() {
         return this.sweetheartName;
     }
+
     // PJ
     public void chargeCard(){
         System.out.println("Card charged for Order "+ orderID);
     }
+
     // Mason
     @Override
     public String toString() {

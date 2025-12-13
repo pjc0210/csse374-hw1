@@ -29,7 +29,7 @@ public class ProgramManager {
         };
     }
 
-    // Mason
+    // Mason & PJ
     public void selectAction(int action) {
         Action act = getAction(action);
         switch (act) {
@@ -212,18 +212,22 @@ public class ProgramManager {
         Order newOrder = new Order(nextOrderNum++, email, cardNum, sweetheartName, songName);
         return singer.addOrder(newOrder);
     }
+
     // PJ
     private String handleGenerateReport(Singer s){
         return s.generateEmailReport();
     }
+
     // PJ
     private int handleSingerCheckout(Singer s) {
         return s.finishOrders();
     }
+
     // PJ
     public Scanner getScanner() {
         return this.scanner;
     }
+
     // PJ
     private boolean checkEmailValidity(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" +
