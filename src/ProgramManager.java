@@ -8,7 +8,7 @@ public class ProgramManager {
     private HashMap<String, Singer> songToSinger;
     private HashMap<Integer, Singer> singer;
     private int nextOrderNum;
-    private Scanner scanner;
+    private final Scanner scanner;
     private static final int NUM_TRIES_BEFORE_ERROR = 3;
 
     private enum Action {
@@ -66,7 +66,7 @@ public class ProgramManager {
                 }
 
                 // enter credit card number
-                int cc = -1;
+                long cc = -1;
                 for (int i =  0; i < NUM_TRIES_BEFORE_ERROR; i++){
                     System.out.println("Enter your credit card number: ");
                     String line = scanner.nextLine().trim();
@@ -75,7 +75,7 @@ public class ProgramManager {
                         continue;
                     }
                     try {
-                        cc = Integer.parseInt(line);
+                        cc = Long.parseLong(line);
                         break;
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid input. Please enter a valid credit card number.");
@@ -87,8 +87,16 @@ public class ProgramManager {
                 }
 
                 // enter sweetheart name
-                System.out.println("Enter your sweetheart’s name: ");
-                String name = scanner.nextLine();
+                String name = null;
+                for (int i = 0; i < NUM_TRIES_BEFORE_ERROR; i++) {
+                    System.out.println("Enter your sweetheart’s name: ");
+                    name = scanner.nextLine();
+                    if (name != null) {
+                        break;
+                    } else {
+                        System.out.println("Please enter a non-empty name.");
+                    }
+                }
 
                 // make order
                 boolean ret = placeOrder(song, email, cc, name);
@@ -98,45 +106,56 @@ public class ProgramManager {
                     System.out.println("Order failed!");
                 }
                 break;
+
             case REPORT:
-                System.out.println("Get a report of requests for your song...\n" +
-                        "Enter your member ID number: \n");
+                System.out.println("Get a report of requests for your song...");
 
-                String report = generateReport( getMemberId(scanner));
-                System.out.println(report);
+                Singer s = getSingerFromInput();
+                System.out.println(handleGenerateReport(s));
                 break;
+
             case DONE:
-                System.out.println("Report back that your songs are done...\n" +
-                        "Enter your member ID number: \n");
-                boolean ret2 = singerCheckout(getMemberId(scanner));
+                System.out.println("Report back that your songs are done...\n");
+                Singer s2 = getSingerFromInput();
+                int ret2 = handleSingerCheckout(s2);
 
-               if (ret2){
-                   System.out.println("Report completed!");
-               } else {
-                   System.out.println("Report failed!");
-               }
+                if (ret2 == 1){
+                    System.out.println("Report completed!");
+                } else if (ret2 == 0) {
+                    System.out.println("There were no orders to complete!");
+                } else if (ret2 < 0) {
+                   System.out.println("Check your orders before you complete them!");
+                }
                 break;
+
             case SUMMARY:
-                System.out.println(singer.values());
+                for (Singer sin : singer.values()) {
+                    System.out.println(sin.toString());
+                }
                 break;
+
             default:
                 System.out.println("Invalid action");
         }
     }
 
-    private int getMemberId(Scanner scanner) {
-        int memberId2;
-        while (true) {
-            System.out.print("Enter member ID: ");
-            String line = scanner.nextLine().trim();
+    private Singer getSingerFromInput() {
+        String input = null;
+        int singerID = -1;
+        Singer s = null;
+
+        for (int i = 0; i < NUM_TRIES_BEFORE_ERROR; i++){
+            System.out.println("Enter your member ID number: ");
+            input = scanner.nextLine().trim();
             try {
-                memberId2 = Integer.parseInt(line);
+                singerID = Integer.parseInt(input);
+                s = singer.get(singerID);
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
+                System.out.println("Invalid input. Please enter a valid member ID.");
             }
         }
-        return memberId2;
+        return s;
     }
 
     private int selectSong(){
@@ -168,13 +187,14 @@ public class ProgramManager {
                 System.out.println("Invalid input. Please enter a valid number number between 1 and " + availableSongs.size() + ": ");
             }
         }
-        if (input == -1){
+        if (input > availableSongs.size() || input < 1){
             System.out.println("Too many invalid inputs. Taking you back to the menu...");
+            return 0;
         }
         return input;
     }
 
-    private boolean placeOrder(int songNum, String email, int cardNum, String sweetheartName) {
+    private boolean placeOrder(int songNum, String email, long cardNum, String sweetheartName) {
         String songName = "";
         Singer singer = null;
         for (String song : this.songToSinger.keySet()) {
@@ -193,17 +213,14 @@ public class ProgramManager {
         }
 
         Order newOrder = new Order(nextOrderNum++, email, cardNum, sweetheartName, songName);
-        singer.addOrder(newOrder);
-        return true;
+        return singer.addOrder(newOrder);
     }
 
-    private String generateReport(int singerID){
-        Singer s = singer.get(singerID);
+    private String handleGenerateReport(Singer s){
         return s.generateEmailReport();
     }
 
-    private boolean singerCheckout(int singerID) {
-        Singer s = singer.get(singerID);
+    private int handleSingerCheckout(Singer s) {
         return s.finishOrders();
     }
 
