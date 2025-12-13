@@ -78,14 +78,17 @@ public class Singer {
         if (singOrders.isEmpty()) {
             orders = "No Orders";
         } else {
-            StringBuilder sb = new StringBuilder();
-            for (Order order : singOrders) {
-                sb.append(order.getSweetheartName());
-                sb.append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length());
-            orders = sb.toString();
+            orders = singOrders.toString();
         }
+//        else {
+//            StringBuilder sb = new StringBuilder();
+//            for (Order order : singOrders) {
+//                sb.append(order.getSweetheartName());
+//                sb.append(", ");
+//            }
+//            sb.delete(sb.length() - 2, sb.length());
+//            orders = sb.toString();
+//        }
         return "Singer [name: " + name + ", songName: " + songName +  ", numCurrentOrders: "+ singOrders.size() + ", currentOrders: {" + orders +"}, isAvailable: " + isAvailable + "]";
     }
 }

@@ -172,7 +172,7 @@ public class ProgramManager {
             return 0;
         }
 
-        System.out.print("Your choice (1-" + availableSongs.size() + "): ");
+        System.out.print((availableSongs.size() == 1) ? "Your choice (1): " : "Your choice (1-" + availableSongs.size() + "): ");
         int input = -1;
         for (int j = 0; j < NUM_TRIES_BEFORE_ERROR; j++) {
             try {
