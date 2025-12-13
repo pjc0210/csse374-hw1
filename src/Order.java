@@ -23,7 +23,6 @@ public class Order {
 
     @Override
     public String toString() {
-        // credit card number is not shown for privacy + security purposes
-        return "Order [customerEmail=" + customerEmail + ", sweetheartName=" + sweetheartName + ", songOrdered=" + songOrdered + "]\n";
+        return "Order [customerEmail=" + customerEmail + ", customerCardNum=" + customerCardNum + ", sweetheartName=" + sweetheartName + ", songOrdered=" + songOrdered + "]\n";
     }
 }
