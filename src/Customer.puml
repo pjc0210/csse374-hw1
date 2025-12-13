@@ -4,20 +4,33 @@
 +class ProgramManager {
     - songToSinger: HashMap<String, Singer>
     - singer: HashMap<Integer, Singer>
+    - nextOrderNum: int
+    - scanner: Scanner
+    - NUM_TRIES_BEFORE_ERROR: int
+
+    + ProgramManager(songToSinger: HashMap<String, Singer>, singer: HashMap<Integer, Singer>)
     + selectAction(action: Action): void
+    + getScanner(): Scanner
+    - getAction(choice: int): Action
+    - getSingerFromInput(): Singer
+    - selectSong(): int
     - placeOrder(songNum: int, email: String, cardNum: int, sweetHeartName: String): boolean
-    - generateReport(singerID: int): String
-    - singerCheckOut(singerID : int): boolean
+    - handleGenerateReport(s: Singer): String
+    - handleSingerCheckOut(s: Singer): int
+    - checkEmailValidity(email: String): boolean
 }
 
 +class Order {
     - orderID: int
     - customerEmail: String
-    - customerCardNum: int
+    - customerCardNum: long
     - sweetheartName: String
     - songOrdered: String
+
+    + Order(orderID: int, customerEmail: String, customerCardNum: long, sweetheartName: String, songOrdered: String)
     + getSweetheartName(): String
-    + chargeCard(): boolean
+    + chargeCard(): void
+    + toString(): String
 }
 
 +class Singer {
@@ -26,9 +39,16 @@
     - songName: String
     - singOrders: ArrayList<Order>
     - isAvailable: boolean
+
+    + Singer(id: int, name: String, songName: String)
     + generateEmailReport(): String
     + addOrder(order: Order): boolean
-    + finishOrders(): boolean
+    + finishOrders(): int
+    + isAvailable(): boolean
+    + getSongName(): String
+    + getId(): String
+    + getOrderReport(): String
+    + toString(): String
 }
 
 +enum Action {
